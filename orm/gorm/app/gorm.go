@@ -12,17 +12,12 @@ package gormdb
 import (
 	"fmt"
 
-	"github.com/jinzhu/gorm"
-
-	// mysql package.
-	_ "github.com/jinzhu/gorm/dialects/mysql"
-
-	// postgres package.
-	_ "github.com/jinzhu/gorm/dialects/postgres"
-
-	// mysql package.
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/revel/revel"
+	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
+	"gorm.io/gorm/schema"
 )
 
 // DB Gorm.
@@ -37,19 +32,6 @@ func init() {
 	})
 }
 
-// InitDB database.
-func OpenDB(dbDriver string, dbInfo string) {
-	db, err := gorm.Open(dbDriver, dbInfo)
-	if err != nil {
-		gormLog.Fatal("sql.Open failed", "error", err)
-	}
-	DB = db
-	singulartable := revel.Config.BoolDefault("db.singulartable", false)
-	if singulartable {
-		DB.SingularTable(singulartable)
-	}
-}
-
 type DbInfo struct {
 	DbDriver   string
 	DbHost     string
@@ -61,16 +43,29 @@ type DbInfo struct {
 
 func InitDBWithParameters(params DbInfo) {
 	dbInfo := ""
+	var driver gorm.Dialector
 	switch params.DbDriver {
 	default:
 		dbInfo = fmt.Sprintf(params.DbHost)
+		driver = sqlite.Open(dbInfo)
 	case "postgres":
 		dbInfo = fmt.Sprintf("host=%s port=%d user=%s dbname=%s sslmode=disable password=%s", params.DbHost, params.DbPort, params.DbUser, params.DbName, params.DbPassword)
+		driver = postgres.Open(dbInfo)
 	case "mysql":
 		dbInfo = fmt.Sprintf("%s:%s@(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local", params.DbUser, params.DbPassword, params.DbHost, params.DbPort, params.DbName)
-		fmt.Println(dbInfo)
+		driver = mysql.Open(dbInfo)
 	}
-	OpenDB(params.DbDriver, dbInfo)
+
+	config := &gorm.Config{}
+	config.NamingStrategy = schema.NamingStrategy{
+		SingularTable: revel.Config.BoolDefault("db.singulartable", false),
+	}
+
+	db, err := gorm.Open(driver, &gorm.Config{})
+	if err != nil {
+		gormLog.Fatal("sql.Open failed", "error", err)
+	}
+	DB = db
 }
 
 func InitDB() {

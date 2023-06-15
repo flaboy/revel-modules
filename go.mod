@@ -1,4 +1,4 @@
-module github.com/revel/modules
+module github.com/flaboy/revel-modules
 
 go 1.14
 
@@ -12,7 +12,6 @@ require (
 	github.com/go-gorp/gorp v2.2.0+incompatible
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/inconshreveable/log15 v0.0.0-20200109203555-b30bc20e4fd1 // indirect
-	github.com/jinzhu/gorm v1.9.12
 	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/myesui/uuid v1.0.0 // indirect
 	github.com/newrelic/go-agent v3.4.0+incompatible
@@ -35,4 +34,5 @@ require (
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 	gopkg.in/stack.v0 v0.0.0-20141108040640-9b43fcefddd0 // indirect
 	gopkg.in/stretchr/testify.v1 v1.2.2 // indirect
+	gorm.io/driver/sqlite v1.5.2 // indirect
 )

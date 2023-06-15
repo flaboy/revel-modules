@@ -5,8 +5,8 @@ import (
 
 	"github.com/casbin/casbin/model"
 	"github.com/casbin/casbin/persist"
-	"github.com/jinzhu/gorm"
 	gormdb "github.com/revel/modules/orm/gorm/app"
+	"gorm.io/gorm"
 )
 
 type Line struct {
