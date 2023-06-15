@@ -10,7 +10,7 @@ require (
 	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/go-gorp/gorp v2.2.0+incompatible
-	github.com/go-sql-driver/mysql v1.5.0
+	github.com/go-sql-driver/mysql v1.7.0
 	github.com/inconshreveable/log15 v0.0.0-20200109203555-b30bc20e4fd1 // indirect
 	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/myesui/uuid v1.0.0 // indirect
@@ -28,11 +28,13 @@ require (
 	github.com/xeonx/timeago v1.0.0-rc4 // indirect
 	github.com/yosssi/ace v0.0.5
 	github.com/ziutek/mymysql v1.5.4 // indirect
-	golang.org/x/crypto v0.0.0-20220214200702-86341886e292
-	golang.org/x/net v0.0.0-20220225172249-27dd8689420f
+	golang.org/x/crypto v0.8.0
+	golang.org/x/net v0.9.0
 	gopkg.in/fsnotify/fsnotify.v1 v1.4.7 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 	gopkg.in/stack.v0 v0.0.0-20141108040640-9b43fcefddd0 // indirect
 	gopkg.in/stretchr/testify.v1 v1.2.2 // indirect
+	gorm.io/driver/mysql v1.5.1 // indirect
+	gorm.io/driver/postgres v1.5.2 // indirect
 	gorm.io/driver/sqlite v1.5.2 // indirect
 )
